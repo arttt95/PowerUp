@@ -31,85 +31,85 @@ no arquivo CSV passado pelo cliente:
 #############################################################
 
 """
-import pyautogui
+import pyautogui as gui
 from time import sleep
-import pandas
+import pandas as pd
 from helper import formata_float_str_moeda
 
 # Time pause after each command for pyautogui
-pyautogui.PAUSE = 1
+gui.PAUSE = 1
 
 # Variáveis
 link = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
 email = 'thuurdamasceno@gmail.com'
 senha = 'xande1301'
-tabela = pandas.read_csv('produtos.csv')
+tabela = pd.read_csv('produtos.csv')
 
 # Abrindo o Chrome
-pyautogui.press('win')
+gui.press('win')
 sleep(1)
-pyautogui.write('chrome')
-pyautogui.press('enter')
+gui.write('chrome')
+gui.press('enter')
 
 # Digitando o link e acessado o sistema
-pyautogui.hotkey('ctrl', 'l')
-pyautogui.write(link)
-pyautogui.press('enter')
+gui.hotkey('ctrl', 'l')
+gui.write(link)
+gui.press('enter')
 
 # Pausar para carregar a página de Login
-sleep(5)
+sleep(2)
 
 # Inserir email
-pyautogui.click(x=2030, y=825, clicks=1, button='left')
-pyautogui.write(email)
+gui.click(x=2030, y=825, clicks=1, button='left')
+gui.write(email)
 
 # Inserir senha
-pyautogui.press('tab')
-pyautogui.write(senha)
-pyautogui.press('enter')
+gui.press('tab')
+gui.write(senha)
+gui.press('enter')
 
 # Pausa para carregar a página de inserção de Produtos
-sleep(5)
+sleep(2)
 
 for linha in tabela.index:
     # Inserindo o Código do produto
-    pyautogui.click(x=1990, y=711)
+    gui.click(x=1990, y=711, clicks=1, button='left')
     codigo = tabela.loc[linha, 'codigo']
-    pyautogui.write(codigo)
-    pyautogui.press('tab')
+    gui.write(codigo)
+    gui.press('tab')
 
     # Inserindo a Marca do Produto
     marca = tabela.loc[linha, 'marca']
-    pyautogui.write(marca)
-    pyautogui.press('tab')
+    gui.write(marca)
+    gui.press('tab')
 
     # Inserindo o Tipo do Produto
-    pyautogui.write(tipo := tabela.loc[linha, 'tipo'])
-    pyautogui.press('tab')
+    gui.write(tipo := tabela.loc[linha, 'tipo'])
+    gui.press('tab')
 
     # Inserindo a a Categoria do Produto
-    pyautogui.write(categoria := str(tabela.loc[linha, 'categoria']))
-    pyautogui.press('tab')
+    gui.write(categoria := str(tabela.loc[linha, 'categoria']))
+    gui.press('tab')
 
     # Inserindo o Preço Unitário do Produto
-    pyautogui.write(preco_unit :=
+    gui.write(preco_unit :=
                     formata_float_str_moeda(tabela.loc[linha, 'preco_unitario']))
-    pyautogui.press('tab')
+    gui.press('tab')
 
     # Inserindo o Custo do Produto
-    pyautogui.write(custo := formata_float_str_moeda(tabela.loc[linha, 'custo']))
-    pyautogui.press('tab')
+    gui.write(custo := formata_float_str_moeda(tabela.loc[linha, 'custo']))
+    gui.press('tab')
 
     # Inserindo as Observações do Produto
     obs = tabela.loc[linha, 'obs']
-    if not pandas.isna(obs):
-        pyautogui.write(obs)
+    if not pd.isna(obs):
+        gui.write(obs)
     else:
         pass
-    pyautogui.press('tab')
+    gui.press('tab')
 
     # Pressionar 'Enter' para enviar
-    pyautogui.press('enter')
+    gui.press('enter')
 
     # Voltar ao início da página
-    pyautogui.scroll(5000)
+    gui.scroll(5000)

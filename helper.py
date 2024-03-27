@@ -1,16 +1,5 @@
-import pyautogui as pai
-from time import sleep
 import pandas as pd
 
-#sleep(4)
-
-#print(pai.position())
-
-# Campo de email Página de Login
-# x=2012, y=826
-
-# Campo de Código do produto Página de Inserção dos Produtos
-# x=2001, y=708
 
 tabela = pd.read_csv('produtos.csv')
 
